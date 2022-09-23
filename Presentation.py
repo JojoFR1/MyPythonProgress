@@ -1,38 +1,41 @@
+## Programme du 15/09/2022 (thanks to Bebert for help)
+## Dernière modification le 24/09/2022
+
 #Get user last name
-def lastName():
-    lastName.user = input("What is your last name?")
-    #Ask the user if the last name is correct
-    answer = input("Your last name is " + lastName.user + "? - y/n")
-    if(answer=="n"):
-        lastName() #Go back where the function is defined
-lastName() #Run function
+def getLastName():
+    return input("What's your last name? ")
 
 #Get user first name
-def firstName():
-    firstName.user = input("What is your first name?")
-    #Ask the user if the first name is correct
-    answer = input("Your first name is " + firstName.user + "? -y/n")
-    if(answer=="n"):
-        firstName() #Go back where the function is defined
-firstName() #Run function
+def getFirstName():
+    return input("What's your first name? ")
+
 
 #Get user age
-def age():
-    age.user = input("What is your age?")
-    #Ask the user if the age is correct
-    answer = input("You're " + age.user + " year old? - y/n")
-    if(answer=="n"):
-        age() #Go back where the function is defined
-age() #Run function
+def getAge():
+    #Verify if the age is a positive integer
+    ageIsValid = False
+    while(not ageIsValid):
+        age = input("What's your age? ")
+        if age.isdigit():
+            age = int(age)
+            if age>0:
+                ageIsValid = True
+    return age
 
 #Get user class
-def classe():
-    classe.user = input("What is your class?")
-    #Ask the user if the class is correct
-    answer = input("Your class is " + classe.user + "? - y/n")
-    if(answer=="n"):
-        classe() #Go back where the function is defined
-classe() #Run function
+def getClass():
+    return input("What's your class? ")
+
+#Get all data
+dataIsValid = False
+
+while(not dataIsValid):
+    lastName = getLastName()
+    firstName = getFirstName()
+    age = getAge()
+    userClass = getClass()
+    if input("Is this correct? Y/N").lower() == "y":
+        dataIsValid = True
 
 #User information summary
-print("Hi, you are " + lastName.user + " " + firstName.user + ", you're " + age.user + " year old and your class is " + classe.user + ".")
+print(f"Hi, you are {lastName} {firstName}, you're {age} years old and your class is {userClass}.")
