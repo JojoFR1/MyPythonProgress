@@ -1,4 +1,4 @@
-## Programme du 15/09/2022 (thanks to Bebert for help)
+## Programme du 15/09/2022 (merci Bebert pour l'aide)
 ## Dernière modification le 24/09/2022
 
 #Get user last name
@@ -8,7 +8,6 @@ def getLastName():
 #Get user first name
 def getFirstName():
     return input("What's your first name? ")
-
 
 #Get user age
 def getAge():
