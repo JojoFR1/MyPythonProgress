@@ -28,6 +28,7 @@ def getClass():
 #Get all data
 dataIsValid = False
 
+#Ask the user if everything is correct
 while(not dataIsValid):
     lastName = getLastName()
     firstName = getFirstName()
