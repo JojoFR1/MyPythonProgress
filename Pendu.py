@@ -2,113 +2,134 @@
 ## Dernière modification le 24/09/2022
 
 # Pendu
-letter = "A - O - M - N"
+import random
+import time
+##Settings
+def settings():
+    global word
+    global display
+    global guessed
+    global fail
+    global err
+    global hangman
+    
+    wordList = ["Python", "Netflix", "Naruto", "Discord"]
+    word = random.choice(wordList)
+    display = "_" * len(word)
+    guessed = []
+    fail = []
+    err = 0
+    limit = 8
+    
+    hangman = [f'''
+                        
+                
+                            Word: {display}
+                            You tried: {fail}
+                
+                
+                
+                
+                Input a letter to guess:''', f'''
+                        
+                
+                            Word: {display}
+                            You tried: {fail}
+                
+                ________
+                
+                Wrong guess: {limit - err} guesses remaining.
+                Input a letter to guess:''', f'''
+                            
+                |
+                |           Word: {display}
+                |           You tried: {fail}
+                |
+               _|_______
+                
+                Wrong guess: {limit - err} guesses remaining.
+                Input a letter to guess:''', f'''
+                ______       
+                |    |
+                |           Word: {display}
+                |           You tried: {fail}
+                |
+               _|_______
+                
+                Wrong guess: {limit - err} guesses remaining.
+                Input a letter to guess:''', f'''
+                ______       
+                |/   |
+                |           Word: {display}
+                |           You tried: {fail}
+                |
+               _|_______
+                
+                Wrong guess: {limit - err} guesses remaining.
+                Input a letter to guess:''', f'''
+                ______       
+                |/   |
+                |    O      Word: {display}
+                |           You tried: {fail}
+                |
+               _|_______
+                
+                Wrong guess: {limit - err} guesses remaining.
+                Input a letter to guess:''', f'''
+                ______       
+                |/   |
+                |    O      Word: {display}
+                |    |      You tried: {fail}
+                |
+               _|_______
+                
+                Wrong guess: {limit - err} guesses remaining.
+                Input a letter to guess:''', f'''
+                ______       
+                |/   |
+                |    O      Word: {display}
+                |   /|\\    You tried: {fail}
+                |
+               _|_______
+                
+                Wrong guess: {limit - err} guesses remaining.
+                Input a letter to guess:''', f'''
+                ______       
+                |/   |
+                |    O      Word: {display}
+                |   /|\\    You tried: {fail}
+                |   / \\
+               _|_______
+                
+                Wrong guess!
+                You lost, the word was {word}''']
 
-step0 = f"""
-      
-      
-      
-      
-     
-     {letter}
-"""
+def game():
+    global word
+    global display
+    global guessed
+    global fail
+    global err
+    
+    print(hangman[0])
+    
+    guess = input()
+    guess = guess.strip
+    # if len(guess.strip()) == 0 or len(guess.strip()) >= 2:
+    #     print("Invalid input, try again!")
+    #     time.sleep(4)
+    #     game()
+    # 
+    # elif guess in word:
+    #     guessed.extend([guess])
+    #     index = word.find(guess)
+    #     display = display[:index] + guess + display[index + 1:]
+    
+    # elif guess in guessed:
+    #     print("Already guessed!")
+    
+    # else:
+    #     err += 1
 
-step1 = f"""   
-      
-      
-      
-      
-     ________
-     {letter}
-     """
-
-step2 = f"""
-      
-      |
-      |
-      |
-      |
-     _|_______
-     {letter}
-     """
-     
-step3 = f"""
-      _______
-      |
-      |
-      |
-      |
-     _|_______
-     {letter}
-"""
-
-step4 = f"""
-      _______
-      |/    |
-      |
-      |
-      |
-     _|_______
-     {letter}
-"""
-
-step5 = f"""
-      _______
-      |/    |
-      |     O
-      |
-      |
-     _|_______
-     {letter}
-"""
-
-step6 = f"""
-      _______
-      |/    |
-      |     O
-      |     |
-      |
-     _|_______
-     {letter}
-"""
-
-step7 = f"""
-      _______
-      |/    |
-      |     O
-      |    /|\\
-      |
-     _|_______
-     {letter}
-"""
-
-step8 = f"""
-      _______
-      |/    |
-      |     O
-      |    /|\\
-      |    / \\
-     _|_______
-     {letter}
-"""
-err = 9 #Testing
-print(step4)
-
-if err == 0:
-    print(step0)
-elif err == 1:
-    print(step1)
-elif err == 2:
-    print(step2)
-elif err == 3:
-    print(step3)
-elif err == 4:
-    print(step4)
-elif err == 5:
-    print(step5)
-elif err == 6:
-    print(step6)
-elif err == 7:
-    print(step7)
-elif err == 8:
-    print(step8)
+settings()
+game()
