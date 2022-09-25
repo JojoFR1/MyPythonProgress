@@ -3,7 +3,8 @@
 
 # Pendu
 import random
-import time
+# import time
+
 ##Settings
 def settings():
     global word
@@ -36,7 +37,7 @@ def settings():
                             Word: {display}
                             You tried: {fail}
                 
-                ________
+               =========
                 
                 Wrong guess: {limit - err} guesses remaining.
                 Input a letter to guess:''', f'''
@@ -45,61 +46,61 @@ def settings():
                 |           Word: {display}
                 |           You tried: {fail}
                 |
-               _|_______
+               =========
                 
                 Wrong guess: {limit - err} guesses remaining.
                 Input a letter to guess:''', f'''
-                ______       
+                +----+       
                 |    |
                 |           Word: {display}
                 |           You tried: {fail}
                 |
-               _|_______
+               ========
                 
                 Wrong guess: {limit - err} guesses remaining.
                 Input a letter to guess:''', f'''
-                ______       
+                +----+      
                 |/   |
                 |           Word: {display}
                 |           You tried: {fail}
                 |
-               _|_______
+               =========
                 
                 Wrong guess: {limit - err} guesses remaining.
                 Input a letter to guess:''', f'''
-                ______       
+                +----+      
                 |/   |
                 |    O      Word: {display}
                 |           You tried: {fail}
                 |
-               _|_______
+               =========
                 
                 Wrong guess: {limit - err} guesses remaining.
                 Input a letter to guess:''', f'''
-                ______       
+                +----+      
                 |/   |
                 |    O      Word: {display}
                 |    |      You tried: {fail}
                 |
-               _|_______
+               =========
                 
                 Wrong guess: {limit - err} guesses remaining.
                 Input a letter to guess:''', f'''
-                ______       
+                +----+      
                 |/   |
                 |    O      Word: {display}
                 |   /|\\    You tried: {fail}
                 |
-               _|_______
+               =========
                 
                 Wrong guess: {limit - err} guesses remaining.
                 Input a letter to guess:''', f'''
-                ______       
+                +----+      
                 |/   |
                 |    O      Word: {display}
                 |   /|\\    You tried: {fail}
                 |   / \\
-               _|_______
+               =========
                 
                 Wrong guess!
                 You lost, the word was {word}''']
@@ -111,7 +112,7 @@ def game():
     global fail
     global err
     
-    print(hangman[0])
+    print(hangman[8])
     
     guess = input()
     guess = guess.strip
