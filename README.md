@@ -8,4 +8,4 @@ This program was made for a simple homework, and this is my first one :)
 
 - - -
 
-## [Pendu.py](https://github.com/JojoFR1/MyPythonProgress/blob/master/Pendu.py)
+## [Pendu.py](https://github.com/JojoFR1/MyPythonProgress/blob/master/Hangman/Pendu.py)
