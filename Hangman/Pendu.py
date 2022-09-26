@@ -128,9 +128,11 @@ def game():
 
     if err == 8:
         print(hangman[8])
+        time.sleep(1)
         playAgain()
         
     guess = input(hangman[err])
+    guess = guess.lower()
     guess = guess.strip()
 
     if len(guess.strip()) == 0 or len(guess.strip()) >= 2: #Check if the input is valid
@@ -150,13 +152,14 @@ def game():
         index = word.find(guess)
         display = display[:index] + guess + display[index +1:]
         game()
-    else: #If none of the above, the guess is wrong
+    else: #If none of the above then the guess is wrong
         err += 1
         fail.append(guess)
         game()
 
-    if display == word:
+    if display: #TODO: Win not working
         print("You found the secret word, you won!")
+        time.sleep(1)
         playAgain()
 
 settings()
