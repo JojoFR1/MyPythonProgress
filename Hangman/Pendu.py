@@ -7,14 +7,14 @@ import json
 import time
 
 ##Settings
-def settings():
+def settings(): #Set-up everything for the game
     global word
     global display
     global guessed
     global fail
     global err
     global limit   
-    with open("Hangman/wordList.json", "r") as read_file:
+    with open("Hangman/wordList.json", "r") as read_file: #TODO: Make a real list, in french
         wordList = json.load(read_file)
     
     word = random.choice(wordList)
@@ -24,7 +24,7 @@ def settings():
     err = 0
     limit = 8
 
-def playAgain():
+def playAgain(): #Ask the user if he want to play again when he lose/win
     replay = input("\nDo you want to play again? Y/N \n")
     while replay.lower() not in ["y", "n"]:
         playAgain()
@@ -41,6 +41,8 @@ def game():
     global guessed
     global fail
     global err
+    
+    #All 9 stages of the hangman drawing
     hangman = [f'''
                         
                 
@@ -143,13 +145,12 @@ def game():
         print(f"You already tried: {guess}!")
         time.sleep(1)
         game()
-    elif guess in word:
-        guessed.append(guess)
+    elif guess in word: #Check if the input is in the word
+        guessed.append(guess) #TODO: Make it so every letter that are the same appear (can stuck the game)
         index = word.find(guess)
         display = display[:index] + guess + display[index +1:]
-        print(display)
         game()
-    else:
+    else: #If none of the above, the guess is wrong
         err += 1
         fail.append(guess)
         game()
