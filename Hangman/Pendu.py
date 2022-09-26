@@ -1,5 +1,5 @@
 ## Programme du 22/09/2022
-## Dernière modification le 24/09/2022
+## Dernière modification le 26/09/2022
 
 # Pendu
 import random
@@ -13,9 +13,7 @@ def settings():
     global guessed
     global fail
     global err
-    global limit
-    global replay
-    
+    global limit   
     with open("Hangman/wordList.json", "r") as read_file:
         wordList = json.load(read_file)
     
@@ -25,15 +23,13 @@ def settings():
     fail = []
     err = 0
     limit = 8
-    
-    replay = ""
 
 def playAgain():
-    global replay
     replay = input("\nDo you want to play again? Y/N \n")
     while replay.lower() not in ["y", "n"]:
         playAgain()
     if replay.lower() == "y":
+        replay = ""
         settings()
     elif replay.lower() == "n":
         exit()
