@@ -26,13 +26,13 @@ def settings(): #Set-up everything for the game
 
 def playAgain(): #Ask the user if he want to play again when he lose/win
     replay = input("\nDo you want to play again? Y/N \n")
-    while replay.lower() not in ["y", "n"]:
-        playAgain()
     if replay.lower() == "y":
         replay = ""
         settings()
     elif replay.lower() == "n":
         exit()
+    else:
+        playAgain()
         
     
 def game():
@@ -126,12 +126,15 @@ def game():
                 Wrong guess!
                 You lost, the word was {word}!''']
 
-    if err == 8:
+    if err == 8: #Check if the user lost the game (max 8 fails)
         print(hangman[8])
-        time.sleep(1)
+        time.sleep(0.5)
         playAgain()
         
-    guess = input(hangman[err])
+    guess = input(hangman[err]) #Get user input to guess a letter
+    if guess == "stop": #Dev Only!
+        exit()
+    
     guess = guess.lower()
     guess = guess.strip()
 
@@ -157,9 +160,9 @@ def game():
         fail.append(guess)
         game()
 
-    if display: #TODO: Win not working
+    if display == word: #TODO: Win not working
         print("You found the secret word, you won!")
-        time.sleep(1)
+        time.sleep(0.5)
         playAgain()
 
 settings()
