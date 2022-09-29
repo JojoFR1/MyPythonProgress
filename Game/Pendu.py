@@ -8,19 +8,11 @@ import time
 
 ##Settings
 def settings(): #Set-up everything for the game
-    global alphabet
-    global word
-    global display
-    global guessed
-    global fail
-    global err
-    global limit
-    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    global word, display, guessed, fail, err, limit
     with open("Game/wordList.json", "r") as read_file: #TODO: Make a real list
         wordList = json.load(read_file)
     
-    word = random.choice(wordList)
-    word = word.upper()
+    word = random.choice(wordList).upper()
     display = "_" * len(word)
     guessed = []
     fail = []
@@ -28,21 +20,17 @@ def settings(): #Set-up everything for the game
     limit = 8
 
 def playAgain(): #Ask the user if he want to play again when he lose/win
-    replay = input("\nDo you want to play again? (Y/N) ")
-    if replay.upper() == "Y":
+    replay = input("\nDo you want to play again? (Y/N) ").upper()
+    if replay == "Y":
         replay = ""
         settings()
-    elif replay.upper() == "N":
+    elif replay == "N":
         exit()
     else:
         playAgain()
 
 def game():
-    global word
-    global display
-    global guessed
-    global fail
-    global err
+    global display, err
 
     #All 9 stages of the hangman drawing
     hangman = [f'''
@@ -129,7 +117,7 @@ def game():
                 You lost, the word was {word}!''']
 
     if display == word: #Check if the user won the game (found the word)
-        print("You found the secret word, you won!")
+        print(f"\n                You found the secret word \"{word}\", you won!")
         time.sleep(0.5)
         playAgain()
     if err == 8: #Check if the user lost the game (max 8 fails)
@@ -144,7 +132,7 @@ def game():
     guess = guess.upper()
     guess = guess.strip()
 
-    if guess not in alphabet or len(guess.strip()) == 0 or len(guess.strip()) >= 2: #Check if the input is a letter and is valid
+    if not guess.isalpha() or len(guess) != 1: #Check if the input is a letter and is valid
         print("Invalid input!")
         time.sleep(1)
         game()
@@ -156,11 +144,14 @@ def game():
         print(f"You already tried: {guess}!")
         time.sleep(1)
         game()
+
     elif guess in word: #Check if the input is in the word
-        guessed.append(guess) #TODO: Make it so every letter that are the same appear (can stuck the game)
-        index = word.find(guess)
-        display = display[:index] + guess + display[index +1:]
+        for letter in range(len(word)):
+            if word[letter] == guess:
+                display[letter] = guess
+                guessed.append(guess)
         game()
+
     else: #If none of the above then the guess is wrong
         err += 1
         fail.append(guess)
