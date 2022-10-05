@@ -19,7 +19,6 @@ def settings(): #Set-up everything for the game
 def playAgain(): #Ask the user if he want to play again when he lose/win
     replay = input("\nDo you want to play again? (Y/N) ").upper()
     if replay == "Y": #If the input = "Y", then the game restart
-        replay = ""
         settings()
     elif replay == "N": #If the input is = "N", then the program stop
         exit()
