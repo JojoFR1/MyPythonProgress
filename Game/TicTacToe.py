@@ -7,24 +7,22 @@ num = "123456789" #Var to check if the input is correct
 score = 0, 0 #Set player 1 and player 2 score to 0 when the program start
 player = 1 #Set player to 1 only when the program start
 
-allowedSymbol = "O X # & $ € %"
+allowedSymbol = "OX"
 def symbolSelect():
-    global symbolP1, symbolP2
-    symbolP1 = input(f"Player 1, please select your symbol ({allowedSymbol}): ").upper()
-    if symbolP1 not in allowedSymbol or len(symbolP1) != 1:
+    global symbol
+    symbolP1 = input(f"Player 1, please select your symbol (O or X): ").upper() #Ask Player 1 to choose one of the two allowed symbol
+    if symbolP1 not in allowedSymbol or len(symbolP1) != 1: #Check if the input is allowed and valid
         print("Invalid input")
         symbolSelect()
-    symbolP2 = input(f"Player 2, please select your symbol ({allowedSymbol}): ").upper()
-    if symbolP2 not in allowedSymbol or len(symbolP2) != 1: #Check if the input is a allowed symbol and is valid
-        print("Invalid input")
-        symbolSelect()
-    if symbolP1 or symbolP2 == 's': #Stop the program (Dev only!)
-        exit()
+    if symbolP1 == "O": #If the input is 'O', then the Plyer 2 symbol is 'X'
+        symbol = [symbolP1, "X"]
+    else: #Else Player 2 symbol is 'O'
+        symbol = [symbolP1, "O"]
 symbolSelect()
 
 
 def settings():
-    global boardLayout, filled, win, move, score, solutions, symbol
+    global boardLayout, filled, win, move, score, solutions
     boardLayout = "123456789"
     filled = []
     win = False
@@ -41,7 +39,6 @@ def settings():
                  #Diagonal
                  [0,4,8],
                  [2,4,6]]
-    symbol = [symbolP1, symbolP2]
 
 def playAgain(): #Ask the user if he want to play again when he lose/win
     replay = input("\nDo you want to play again? (Y/N) ").upper()
@@ -54,7 +51,8 @@ def playAgain(): #Ask the user if he want to play again when he lose/win
 
 def game():
     global boardLayout, player, score, win, move
-    
+
+    #WIP
     for solution in solutions:
         line = boardLayout[solution[0]] == boardLayout[solution[1]] == boardLayout[solution[2]]
         if line:
@@ -66,49 +64,48 @@ def game():
                 player = 2 #Set the player to Player 2
                 score = score[0], score[1] + 1 #Keep Player 1 score the same, add 1 to Player 2 score
                 win = True
-    
+
     #The Tic-Tac-Toe board with multiple variants, when the game is played, when the game is finished and when the game is a tie
     board = [f'''
                              PLAYER {player} ({symbol[player-1]}) TURN
-              
+
                                  {boardLayout[0]} | {boardLayout[1]} | {boardLayout[2]}
                                 ===+===+===       SCORE
                                  {boardLayout[3]} | {boardLayout[4]} | {boardLayout[5]}     Player 1: {score[0]}
                                 ===+===+===    Player 2: {score[1]}
                                  {boardLayout[6]} | {boardLayout[7]} | {boardLayout[8]}
-                
+
                       Select where to place your symbol: ''', f'''
                               PLAYER {player} ({symbol[player-1]}) WON
-              
+
                                  {boardLayout[0]} | {boardLayout[1]} | {boardLayout[2]}
                                 ===+===+===       SCORE
                                  {boardLayout[3]} | {boardLayout[4]} | {boardLayout[5]}     Player 1: {score[0]}
                                 ===+===+===    Player 2: {score[1]}
                                  {boardLayout[6]} | {boardLayout[7]} | {boardLayout[8]}
-                
+
                       Congrats! Player {player} ({symbol[player-1]}) won the game!''', f'''
                                  IT\'S A TIE
-              
+
                                  {boardLayout[0]} | {boardLayout[1]} | {boardLayout[2]}
                                 ===+===+===       SCORE
                                  {boardLayout[3]} | {boardLayout[4]} | {boardLayout[5]}     Player 1: {score[0]}
                                 ===+===+===    Player 2: {score[1]}
                                  {boardLayout[6]} | {boardLayout[7]} | {boardLayout[8]}
-                
+
                       It's a tie! No one won, better luck next time!''']
     if win: #If one of the player won, then ask the player if he wants to play again
         print(board[1]) #Show the winning board
-        playAgain()
+        playAgain() #Ask the user if he wants to play again
     if move == 0: #If move is equal to zero, it means the game is a tie
-        print(board[2])
-        playAgain()
-    
-    case = input(board[0])
-    print(move)
-    case.strip()
+        print(board[2]) #Show the tie board
+        playAgain() #Ask the user if he wants to play again
+
+    case = input(board[0]) #Ask the player where he wants to place his symbol
+    case = case.strip()
     if case == "s": #To stop the game (Dev Only!)
         exit()
-    
+
     if case not in num or len(case) !=1: #Check if the input is a valid number and is valid
         print("Invalid input!")
         time.sleep(1)
@@ -119,9 +116,9 @@ def game():
         game()
     else:
         boardLayout = boardLayout.replace(case, symbol[player-1]) #Replace the case input with the player symbol
-        if player == 1: #If it was player 1 turn, then add 1 to player to become player 2.
+        if player == 1: #If it was Player 1 turn, then add 1 to player to become Player 2.
             player += 1
-        else: #If it was not player 1 turn, then remove 1 to player to become player 1.
+        else: #If it was not Player 1 turn, then remove 1 to player to become Player 1.
             player -= 1
         filled.append(case) #Add the input case to the filled list
         move -= 1
